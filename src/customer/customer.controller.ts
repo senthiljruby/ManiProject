@@ -92,7 +92,7 @@ export class CustomerController {
     @Param('imagename') imagename,
     @Res() res,
   ): Observable<Object> {
-    if (typeof imagename === 'string') {
+    if (JSON.stringify(imagename) != '"[object FileList]"') {
       return of(
         res.sendFile(
           join(process.cwd(), 'uploads/customer_images/' + imagename),
