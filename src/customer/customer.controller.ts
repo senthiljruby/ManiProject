@@ -78,8 +78,6 @@ export class CustomerController {
   @UseInterceptors(FileInterceptor('file', storage))
   async uploadFile(@UploadedFile() file, @Request() req) {
     const customer_id: string = req.body.customer_id;
-    console.log('1',file);
-    console.log('2', customer_id);
     return { image: file.filename };
     // return (
     //   await this.service.updateOne(customer_id, { image: file.filename })
@@ -94,11 +92,14 @@ export class CustomerController {
     @Param('imagename') imagename,
     @Res() res,
   ): Observable<Object> {
-    return of(
-      res.sendFile(join(process.cwd(), 'uploads/customer_images/' + imagename)),
-    );
+    if (typeof imagename === 'string') {
+      return of(
+        res.sendFile(
+          join(process.cwd(), 'uploads/customer_images/' + imagename),
+        ),
+      );
+    }
   }
-
 
   @Get('check-firstname/:firstname')
   async getFirstname(@Param('firstname') firstname) {
