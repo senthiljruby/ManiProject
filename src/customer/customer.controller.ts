@@ -78,7 +78,8 @@ export class CustomerController {
   @UseInterceptors(FileInterceptor('file', storage))
   async uploadFile(@UploadedFile() file, @Request() req) {
     const customer_id: string = req.body.customer_id;
-    console.log(customer_id);
+    console.log('1',file);
+    console.log('2', customer_id);
     return { image: file.filename };
     // return (
     //   await this.service.updateOne(customer_id, { image: file.filename })
