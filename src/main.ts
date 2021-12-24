@@ -22,26 +22,26 @@ async function bootstrap() {
   //     }
   //   },
   // });
-  // app.enableCors();
-  app.enableCors({
-    origin: function (origin, callback) {
-      console.log("-------------------------------------------------------");
-      console.log('whitelist', whitelist);
-      console.log(whitelist.indexOf(origin));
-      console.log(whitelist.indexOf(origin) !== -1);
-      console.log('-------------------------------------------------------');
-      if (whitelist.indexOf(origin) !== -1) {
-        console.log('allowed cors for:', origin);
-        callback(null, true);
-      } else {
-        console.log('blocked cors for:', origin);
-        callback(new Error('Not allowed by CORS'));
-      }
-    },
-    allowedHeaders: '*',
-    methods: 'GET,PUT,POST,DELETE,UPDATE,OPTIONS',
-    credentials: true,
-  });
+  app.enableCors();
+  // app.enableCors({
+  //   origin: function (origin, callback) {
+  //     console.log("-------------------------------------------------------");
+  //     console.log('whitelist', whitelist);
+  //     console.log(whitelist.indexOf(origin));
+  //     console.log(whitelist.indexOf(origin) !== -1);
+  //     console.log('-------------------------------------------------------');
+  //     if (whitelist.indexOf(origin) !== -1) {
+  //       console.log('allowed cors for:', origin);
+  //       callback(null, true);
+  //     } else {
+  //       console.log('blocked cors for:', origin);
+  //       callback(new Error('Not allowed by CORS'));
+  //     }
+  //   },
+  //   allowedHeaders: '*',
+  //   methods: 'GET,PUT,POST,DELETE,UPDATE,OPTIONS',
+  //   credentials: true,
+  // });
   await app.listen(process.env.PORT);
 }
 
