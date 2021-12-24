@@ -15,6 +15,7 @@ async function bootstrap() {
   app.enableCors({
     origin: function (origin, callback) {
       if (!origin || whitelist.indexOf(origin) !== -1) {
+        console.log('I am inside origin');
         callback(null, true);
       } else {
         callback(new Error('Not allowed by CORS'));
