@@ -12,16 +12,16 @@ async function bootstrap() {
   // var whitelist = ['example.com', 'api.example.com'];
   const whitelist = process.env.WHITELIST_CORS.split(', ');
   console.log(whitelist);
-  app.enableCors({
-    origin: function (origin, callback) {
-      if (!origin || whitelist.indexOf(origin) !== -1) {
-        console.log('I am inside origin');
-        callback(null, true);
-      } else {
-        callback(new Error('Not allowed by CORS'));
-      }
-    },
-  });
+  // app.enableCors({
+  //   origin: function (origin, callback) {
+  //     if (!origin || whitelist.indexOf(origin) !== -1) {
+  //       console.log('I am inside origin');
+  //       callback(null, true);
+  //     } else {
+  //       callback(new Error('Not allowed by CORS'));
+  //     }
+  //   },
+  // });
   // app.enableCors();
   await app.listen(process.env.PORT);
 }
