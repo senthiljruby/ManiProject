@@ -25,6 +25,11 @@ async function bootstrap() {
   // app.enableCors();
   app.enableCors({
     origin: function (origin, callback) {
+      console.log("-------------------------------------------------------");
+      console.log('whitelist', whitelist);
+      console.log(whitelist.indexOf(origin));
+      console.log(whitelist.indexOf(origin) !== -1);
+      console.log('-------------------------------------------------------');
       if (whitelist.indexOf(origin) !== -1) {
         console.log('allowed cors for:', origin);
         callback(null, true);
