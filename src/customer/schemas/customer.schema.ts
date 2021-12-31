@@ -29,8 +29,8 @@ export class Customer {
   @Prop()
   address: string;
 
-  @Prop()
-  image: string;
+  @Prop([String])
+  image: string[];
 
   @Prop()
   description?: string;
