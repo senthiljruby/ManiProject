@@ -105,4 +105,9 @@ export class CustomerController {
   async getFirstname(@Param('firstname') firstname) {
     return await this.service.getfirstname(firstname);
   }
+
+  @Get('search_by_phonenumber/:phonenumber')
+  async searchByPhonenumber(@Param('phonenumber') phonenumber) {
+    return await this.service.getByPhonenumber(phonenumber);
+  }
 }

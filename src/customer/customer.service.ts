@@ -49,4 +49,13 @@ export class CustomerService {
   async getfirstname(firstname) {
     return await this.model.findOne({ firstname: firstname }).exec();
   }
+
+  async getByPhonenumber(phonenumber) {
+    console.log(phonenumber);
+    if (phonenumber && phonenumber != 'all') {
+      return await this.model.find({ phone: phonenumber }).exec();
+    } else {
+      return await this.model.find().exec();
+    }
+  }
 }

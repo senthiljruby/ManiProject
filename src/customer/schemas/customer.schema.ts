@@ -18,6 +18,15 @@ export class Customer {
   phone: string;
 
   @Prop()
+  dob?: string;
+
+  @Prop()
+  gender?: string;
+
+  @Prop()
+  martial?: string;
+
+  @Prop()
   address: string;
 
   @Prop()
