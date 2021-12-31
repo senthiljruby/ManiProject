@@ -58,4 +58,57 @@ export class CustomerService {
       return await this.model.find().exec();
     }
   }
+
+  async getCustomerStats() {
+    // return await this.model.find().exec();
+    const customerCount = await this.model.countDocuments({});
+    const imageUploads = await this.model.find({ image: { $ne: null } }).exec();
+    const _imageCountArray = imageUploads.map((image) => image.image.length);
+    const imageCount = _imageCountArray.reduce((a, b) => a + b, 0);
+    // db.col.aggregate(
+    //   { $group: { _id: { $dayOfYear: "$date"},
+    //               click: { $sum: 1 } } }
+    //   )
+
+    const customerAggregate = await this.model.find({}).exec();
+
+    const dates = [new Date(), new Date()];
+    const months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May", 
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+    ];
+    
+    const sortedDates: Array<{name: string, dates: Array<Date>, count: number}> = [];
+    
+    customerAggregate.map(customer => {
+      const month = months[customer.createdAt.getMonth()];
+      const count = 1;
+      const monthObj = sortedDates.find(datesByMonth => datesByMonth.name === month)
+      
+      if (monthObj === undefined) {
+        sortedDates.push({
+          name: month,
+          dates: [
+            customer.createdAt
+          ],
+          count: count
+        })
+        return;
+      }
+    
+      monthObj.dates.push(customer.createdAt);
+      monthObj.count += count;
+    });
+    return { customerCount: customerCount, imageCount: imageCount, stats: sortedDates };
+  }
 }

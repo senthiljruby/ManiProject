@@ -110,4 +110,9 @@ export class CustomerController {
   async searchByPhonenumber(@Param('phonenumber') phonenumber) {
     return await this.service.getByPhonenumber(phonenumber);
   }
+
+  @Get('stats/get-customer-stats')
+  async getStats() {
+    return await this.service.getCustomerStats();
+  }
 }
