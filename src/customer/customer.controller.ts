@@ -38,26 +38,29 @@ export const storage = {
   }),
 };
 
-@UseGuards(JwtAuthGuard)
 @Controller('customers')
 export class CustomerController {
   constructor(private readonly service: CustomerService) {}
 
+  @UseGuards(JwtAuthGuard)
   @Get()
   async index() {
     return await this.service.findAll();
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get(':id')
   async find(@Param('id') id: string) {
     return await this.service.findOne(id);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Post()
   async create(@Body() createCustomerDto: CreateCustomerDto) {
     return await this.service.create(createCustomerDto);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Put(':id')
   async update(
     @Param('id') id: string,
@@ -66,6 +69,7 @@ export class CustomerController {
     return await this.service.update(id, updateCustomerDto);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Delete(':id')
   async delete(@Param('id') id: string) {
     return await this.service.delete(id);
@@ -104,16 +108,19 @@ export class CustomerController {
     }
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get('check-firstname/:firstname')
   async getFirstname(@Param('firstname') firstname) {
     return await this.service.getfirstname(firstname);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get('search_by_phonenumber/:phonenumber')
   async searchByPhonenumber(@Param('phonenumber') phonenumber) {
     return await this.service.getByPhonenumber(phonenumber);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get('stats/get-customer-stats')
   async getStats() {
     return await this.service.getCustomerStats();
