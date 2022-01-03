@@ -12,6 +12,9 @@ export class Customer {
   lastname: string;
 
   @Prop()
+  mfid: string;
+
+  @Prop()
   email: string;
 
   @Prop()
