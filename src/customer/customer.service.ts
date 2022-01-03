@@ -74,41 +74,49 @@ export class CustomerService {
 
     const dates = [new Date(), new Date()];
     const months = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May", 
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December"
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
     ];
-    
-    const sortedDates: Array<{name: string, dates: Array<Date>, count: number}> = [];
-    
-    customerAggregate.map(customer => {
+
+    const sortedDates: Array<{
+      name: string;
+      dates: Array<Date>;
+      count: number;
+    }> = [];
+
+    customerAggregate.map((customer) => {
       const month = months[customer.createdAt.getMonth()];
       const count = 1;
-      const monthObj = sortedDates.find(datesByMonth => datesByMonth.name === month)
-      
+      const monthObj = sortedDates.find(
+        (datesByMonth) => datesByMonth.name === month,
+      );
+
       if (monthObj === undefined) {
         sortedDates.push({
           name: month,
-          dates: [
-            customer.createdAt
-          ],
-          count: count
-        })
+          dates: [customer.createdAt],
+          count: count,
+        });
         return;
       }
-    
+
       monthObj.dates.push(customer.createdAt);
       monthObj.count += count;
     });
-    return { customerCount: customerCount, imageCount: imageCount, stats: sortedDates };
+    return {
+      customerCount: customerCount,
+      imageCount: imageCount,
+      stats: sortedDates,
+    };
   }
 }

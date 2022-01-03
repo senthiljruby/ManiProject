@@ -10,6 +10,7 @@ import {
   Request,
   UploadedFile,
   UseInterceptors,
+  UseGuards,
 } from '@nestjs/common';
 import { CreateCustomerDto } from './dto/create-customer.dto';
 import { UpdateCustomerDto } from './dto/update-customer.dto';
@@ -22,6 +23,7 @@ import { join } from 'path';
 import { Image } from './model/Image.interface';
 import { Observable, from, throwError, of, map, tap } from 'rxjs';
 import { Customer } from './schemas/customer.schema';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 export const storage = {
   storage: diskStorage({
@@ -36,6 +38,7 @@ export const storage = {
   }),
 };
 
+@UseGuards(JwtAuthGuard)
 @Controller('customers')
 export class CustomerController {
   constructor(private readonly service: CustomerService) {}
