@@ -51,9 +51,22 @@ export class CustomerService {
   }
 
   async getByPhonenumber(phonenumber) {
-    console.log(phonenumber);
     if (phonenumber && phonenumber != 'all') {
-      return await this.model.find({ phone: phonenumber }).exec();
+      return await this.model
+        .find({
+          $or: [
+            {
+              phone: { $regex: phonenumber, $options: 'i' },
+            },
+            {
+              mfid: { $regex: phonenumber, $options: 'i' },
+            },
+            {
+              firstname: { $regex: phonenumber, $options: 'i' },
+            },
+          ],
+        })
+        .exec();
     } else {
       return await this.model.find().exec();
     }
